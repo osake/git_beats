@@ -91,4 +91,5 @@ while( fio => val )
 
   // sporkage!!
   spork ~ beatify( val );
+  500::ms => now;
 }
