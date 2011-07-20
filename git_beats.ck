@@ -1,4 +1,4 @@
-string beat_files[6];
+string beat_files[7];
 
 "beats/otf_01" => beat_files[0];
 "beats/otf_02" => beat_files[1];
@@ -6,6 +6,7 @@ string beat_files[6];
 "beats/otf_04" => beat_files[3];
 "beats/otf_05" => beat_files[4];
 "beats/otf_06" => beat_files[5];
+"beats/otf_07" => beat_files[6];
 
 // default file
 "data_test.txt" => string filename;
@@ -22,30 +23,31 @@ fun void fives()
   5000::ms => now;
 }
 
+fun void funks(int high, int low)
+{
+    Machine.add(beat_files[high]) => int special_beat;
+    fives();
+    Machine.replace(special_beat, beat_files[low]);
+    fives();
+    Machine.remove(special_beat);
+}
+
 fun void random_funk()
 {
   Std.rand2(1,20) => int random;
   if (random > 19)
   {
-    Machine.add(beat_files[5]) => int special_beat;
-    fives();
-    Machine.replace(special_beat, beat_files[4]);
-    fives();
-    Machine.remove(special_beat);
+    funks(6,1);
   }
   if (random > 18 && random <= 19)
   {
-    Machine.add(beat_files[4]) => int special_beat;
-    fives();
-    Machine.replace(special_beat, beat_files[3]);
-    fives();
-    Machine.remove(special_beat);
+    funks(5,4);
   }
 }
 
 fun void beatify( int value )
 {
-  if ( value <= 10 )
+  if ( value <= 12 )
   {
     Machine.add(beat_files[value/2]) => int something_useful;
 
