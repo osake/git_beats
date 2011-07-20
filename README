@@ -1,0 +1,21 @@
+Just a little fun taking git repos and generating some beats using chuck and its sample code.  My pair and I were admiring a really "nice" git repo with lots of branchy goodness making for beautiful graphs and were wondering about putting some sound behind it.  Well... here's my evening hacking around in chuck!  It's only designed for even integers up to 20, so you might get weirdness if the repo you are sampling is super branchy.
+
+Install chuck:
+
+  http://chuck.cs.princeton.edu/
+
+Generate file with something like this:
+
+  git log --graph --format=oneline | ruby -e "puts STDIN.readlines.map{|line| line =~ /\*/}.compact" > outfile.txt
+
+Play my sample file:
+
+  chuck git_beats.ck
+
+Or your data:
+
+  chuck git_beats.ck:outfile.txt
+
+Enjoy!
+
+--Josh
